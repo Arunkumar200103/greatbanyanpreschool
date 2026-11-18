@@ -5,7 +5,8 @@ import {
   Sun, Flower2, MessageCircle, CheckCircle2, GraduationCap,
   Mail, TreePine, Users, Award, Smile, Camera, Compass,
   HelpCircle, ChevronDown, Utensils, Feather, Sparkle,
-  Image as ImageIcon, ZoomIn, HeartHandshake, Eye
+  Image as ImageIcon, ZoomIn, HeartHandshake, Eye,
+  Navigation, ExternalLink
 } from 'lucide-react'
 
 const phone = '099624 56830'
@@ -285,6 +286,45 @@ const faqs = [
   }
 ]
 
+const campuses = [
+  {
+    id: 'campus-1',
+    badge: 'Campus 1 · V V Colony',
+    schoolName: 'Great Banyan Preschool',
+    type: 'Kindergarten School',
+    rating: '4.9',
+    ratingScore: 4.9,
+    reviewsCount: 35,
+    street: '11, 4th St',
+    fullAddress: '11, 4th St, V V Colony, New Colony, Adambakkam, Chennai, Tamil Nadu 600088',
+    phone: '099624 56830',
+    phoneTel: 'tel:+919962456830',
+    status: 'Open · Closes 8 pm',
+    quote: 'Teachers and caretakers taking utmost good care of the children.',
+    mapUrl: 'https://maps.app.goo.gl/QZZfJmCJb4fdEhsW8',
+    directionsUrl: 'https://www.google.com/maps/dir//Great+Banyan+Preschool,+11,+4th+St,+V+V+Colony,+New+Colony,+Adambakkam,+Chennai,+Tamil+Nadu+600088/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x3a525df78e02b4f7:0x733ed38de556607e?sa=X&ved=1t:57443&ictx=111',
+    embedUrl: 'https://maps.google.com/maps?q=Great+Banyan+Preschool,+11,+4th+St,+V+V+Colony,+New+Colony,+Adambakkam,+Chennai&t=&z=16&ie=UTF8&iwloc=&output=embed'
+  },
+  {
+    id: 'campus-2',
+    badge: 'Campus 2 · Saraswathi Street',
+    schoolName: 'Great Banyan Preschool',
+    type: 'School center',
+    rating: '5.0',
+    ratingScore: 5.0,
+    reviewsCount: 27,
+    street: 'Saraswathi street, Second, Big St',
+    fullAddress: 'Saraswathi street, Second, Big St, Bharath Nagar, Adambakkam, Chennai, Tamil Nadu 600088',
+    phone: '099624 56830',
+    phoneTel: 'tel:+919962456830',
+    status: 'Open · Closes 8 pm',
+    quote: 'All the teachers and care givers are kind, caring and mindful.',
+    mapUrl: 'https://maps.app.goo.gl/TXAaP2PYPCMK2zJm6',
+    directionsUrl: 'https://www.google.com/maps/dir//Great+Banyan+Preschool,+Saraswathi+street,+Second,+Big+St,+Bharath+Nagar,+Adambakkam,+Chennai,+Tamil+Nadu+600088/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x3a525d0094fb4d6f:0xfbb9bc04ccc2b44e?sa=X&ved=1t:57443&ictx=111',
+    embedUrl: 'https://maps.google.com/maps?q=Great+Banyan+Preschool,+Saraswathi+street,+Second,+Big+St,+Bharath+Nagar,+Adambakkam,+Chennai&t=&z=16&ie=UTF8&iwloc=&output=embed'
+  }
+]
+
 function SectionTitle({ eyebrow, title, text, center = true }) {
   return (
     <div className={`section-title ${center ? 'text-center' : ''}`}>
@@ -360,7 +400,7 @@ function App() {
   const [openFaq, setOpenFaq] = useState(0)
   const [lightboxImg, setLightboxImg] = useState(null)
   const [likedPhotos, setLikedPhotos] = useState({})
-  const [form, setForm] = useState({ parent: '', child: '', phone: '', programme: 'Play Group', message: '' })
+  const [form, setForm] = useState({ parent: '', child: '', phone: '', programme: 'Play Group', campus: 'Campus 1 (11, 4th St, V V Colony)', message: '' })
 
   const nav = [
     ['Home', '#home'],
@@ -370,7 +410,7 @@ function App() {
     ['Gallery', '#gallery'],
     ['Daily Rhythm', '#routine'],
     ['Daycare', '#daycare'],
-    ['Celebrations', '#celebrations'],
+    ['Campuses & Maps', '#campuses'],
     ['FAQ', '#faq'],
     ['Contact', '#contact']
   ]
@@ -378,7 +418,7 @@ function App() {
   const update = (e) => setForm({ ...form, [e.target.name]: e.target.value })
   const sendEnquiry = (e) => {
     e.preventDefault()
-    const msg = `Hello Great Banyan Preschool!%0AParent: ${encodeURIComponent(form.parent)}%0AChild: ${encodeURIComponent(form.child)}%0APhone: ${encodeURIComponent(form.phone)}%0AInterested in: ${encodeURIComponent(form.programme)}%0AMessage: ${encodeURIComponent(form.message)}`
+    const msg = `Hello Great Banyan Preschool!%0AParent: ${encodeURIComponent(form.parent)}%0AChild: ${encodeURIComponent(form.child)}%0APhone: ${encodeURIComponent(form.phone)}%0APreferred Campus: ${encodeURIComponent(form.campus)}%0AInterested in: ${encodeURIComponent(form.programme)}%0AMessage: ${encodeURIComponent(form.message)}`
     window.open(`https://wa.me/${whatsapp}?text=${msg}`, '_blank', 'noopener,noreferrer')
     setSubmitted(true)
   }
@@ -980,6 +1020,208 @@ function App() {
           </div>
         </section>
 
+        {/* ── TWO CHENNAI CAMPUSES & INTERACTIVE GOOGLE MAPS ── */}
+        <section className="section campuses-section" id="campuses" style={{ scrollMarginTop: '130px', background: '#fdfaf6' }}>
+          <div className="container">
+            <SectionTitle
+              eyebrow="TWO LOCATIONS IN ADAMBAKKAM"
+              title={<>Find our preschool campuses<br /><em>near your home in Chennai.</em></>}
+              text="Both branches offer CCTV monitored spaces, affectionate caretakers, child-safe Montessori play zones, and extended daycare open daily until 8:00 PM."
+            />
+
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gap: '28px',
+              marginTop: '42px'
+            }}>
+              {campuses.map((c) => (
+                <div
+                  key={c.id}
+                  style={{
+                    background: '#fff',
+                    borderRadius: '24px',
+                    border: '1px solid rgba(122,20,40,0.12)',
+                    boxShadow: '0 10px 30px rgba(122,20,40,0.06)',
+                    overflow: 'hidden',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    transition: 'transform 0.25s, box-shadow 0.25s'
+                  }}
+                >
+                  {/* Card Header */}
+                  <div style={{ padding: '22px 24px 16px', borderBottom: '1px solid #f3e8e2' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px', flexWrap: 'wrap', marginBottom: '8px' }}>
+                      <span style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        background: '#fdf0f4',
+                        color: 'var(--clr-maroon)',
+                        fontSize: '11px',
+                        fontWeight: 800,
+                        letterSpacing: '0.4px',
+                        textTransform: 'uppercase',
+                        padding: '5px 12px',
+                        borderRadius: '16px'
+                      }}>
+                        <MapPin size={13} color="var(--clr-pink)" /> {c.badge}
+                      </span>
+                      <span style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        background: '#e8f8ee',
+                        color: '#1a7337',
+                        fontSize: '11.5px',
+                        fontWeight: 700,
+                        padding: '4px 11px',
+                        borderRadius: '14px'
+                      }}>
+                        <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#25d366', display: 'inline-block' }}></span>
+                        {c.status}
+                      </span>
+                    </div>
+
+                    <h3 style={{
+                      fontFamily: 'var(--ff-heading)',
+                      fontSize: '22px',
+                      color: 'var(--clr-maroon)',
+                      fontWeight: 800,
+                      margin: '4px 0 8px',
+                      lineHeight: 1.2
+                    }}>
+                      {c.schoolName}
+                    </h3>
+
+                    {/* Google Ratings row */}
+                    <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '8px', fontSize: '13px' }}>
+                      <div style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '5px',
+                        background: '#fff9e6',
+                        color: '#9e6a00',
+                        fontWeight: 800,
+                        padding: '3px 10px',
+                        borderRadius: '12px',
+                        border: '1px solid #f6e09e'
+                      }}>
+                        <Star size={14} fill="#f59e0b" color="#f59e0b" />
+                        <span>{c.rating}</span>
+                        <span style={{ color: '#666', fontWeight: 600 }}>({c.reviewsCount})</span>
+                      </div>
+                      <span style={{ color: '#888' }}>•</span>
+                      <span style={{ color: '#555', fontWeight: 600 }}>{c.type}</span>
+                    </div>
+                  </div>
+
+                  {/* Interactive Google Map iframe */}
+                  <div style={{ position: 'relative', width: '100%', height: '220px', background: '#f5f5f5' }}>
+                    <iframe
+                      src={c.embedUrl}
+                      title={`${c.schoolName} - ${c.badge}`}
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0, display: 'block' }}
+                      loading="lazy"
+                      allowFullScreen
+                      referrerPolicy="no-referrer-when-downgrade"
+                    />
+                  </div>
+
+                  {/* Card Details & Quote */}
+                  <div style={{ padding: '20px 24px 24px', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+                    {/* Address */}
+                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', marginBottom: '12px' }}>
+                      <MapPin size={18} color="var(--clr-maroon)" style={{ flexShrink: 0, marginTop: '2px' }} />
+                      <div>
+                        <b style={{ color: 'var(--clr-maroon)', fontSize: '14px', display: 'block' }}>{c.street}</b>
+                        <p style={{ margin: '3px 0 0', fontSize: '12px', color: '#666', lineHeight: 1.5 }}>
+                          {c.fullAddress}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Phone */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
+                      <Phone size={15} color="var(--clr-green)" style={{ flexShrink: 0 }} />
+                      <a
+                        href={c.phoneTel}
+                        style={{ color: 'var(--clr-maroon)', fontSize: '12.5px', fontWeight: 700, textDecoration: 'none' }}
+                      >
+                        {c.phone}
+                      </a>
+                    </div>
+
+                    {/* Parent Review Quote */}
+                    <div style={{
+                      background: 'linear-gradient(135deg, #fff5f8 0%, #fff9f6 100%)',
+                      borderLeft: '4px solid var(--clr-pink)',
+                      padding: '12px 14px',
+                      borderRadius: '0 14px 14px 0',
+                      marginBottom: '18px',
+                      marginTop: 'auto'
+                    }}>
+                      <p style={{ margin: 0, fontSize: '12px', fontStyle: 'italic', color: '#444', lineHeight: 1.6 }}>
+                        "{c.quote}"
+                      </p>
+                      <small style={{ display: 'block', marginTop: '4px', fontSize: '10px', color: '#888', fontWeight: 600 }}>
+                        — Verified Google Parent Review
+                      </small>
+                    </div>
+
+                    {/* Action buttons */}
+                    <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: '10px' }}>
+                      <a
+                        href={c.directionsUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="btn btn-primary"
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '6px',
+                          fontSize: '12px',
+                          padding: '10px 14px',
+                          borderRadius: '24px',
+                          textDecoration: 'none',
+                          textAlign: 'center'
+                        }}
+                      >
+                        <Navigation size={14} /> Directions
+                      </a>
+                      <a
+                        href={c.mapUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '6px',
+                          fontSize: '12px',
+                          fontWeight: 700,
+                          padding: '10px 14px',
+                          borderRadius: '24px',
+                          border: '1.5px solid var(--clr-maroon)',
+                          color: 'var(--clr-maroon)',
+                          background: '#fff',
+                          textDecoration: 'none',
+                          textAlign: 'center'
+                        }}
+                      >
+                        <ExternalLink size={14} /> Google Maps
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* ── Contact ── */}
         <section className="section contact-section" id="contact" style={{ scrollMarginTop: '130px' }}>
           <div className="container contact-grid">
@@ -992,7 +1234,33 @@ function App() {
               />
               <div className="contact-detail">
                 <span><MapPin /></span>
-                <div><b>Campus Address</b><p>11, 4th St, V V Colony, New Colony,<br />Adambakkam, Chennai, Tamil Nadu 600088</p></div>
+                <div>
+                  <b>Campus 1 (V V Colony)</b>
+                  <p>11, 4th St, V V Colony, New Colony,<br />Adambakkam, Chennai 600088</p>
+                  <a
+                    href="https://www.google.com/maps/dir//Great+Banyan+Preschool,+11,+4th+St,+V+V+Colony,+New+Colony,+Adambakkam,+Chennai,+Tamil+Nadu+600088/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x3a525df78e02b4f7:0x733ed38de556607e?sa=X&ved=1t:57443&ictx=111"
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{ fontSize: '11.5px', color: 'var(--clr-pink)', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '4px', marginTop: '4px' }}
+                  >
+                    Get Directions <ArrowRight size={13} />
+                  </a>
+                </div>
+              </div>
+              <div className="contact-detail">
+                <span><MapPin /></span>
+                <div>
+                  <b>Campus 2 (Saraswathi St)</b>
+                  <p>Saraswathi street, Second, Big St, Bharath Nagar,<br />Adambakkam, Chennai 600088</p>
+                  <a
+                    href="https://www.google.com/maps/dir//Great+Banyan+Preschool,+Saraswathi+street,+Second,+Big+St,+Bharath+Nagar,+Adambakkam,+Chennai,+Tamil+Nadu+600088/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x3a525d0094fb4d6f:0xfbb9bc04ccc2b44e?sa=X&ved=1t:57443&ictx=111"
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{ fontSize: '11.5px', color: 'var(--clr-pink)', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '4px', marginTop: '4px' }}
+                  >
+                    Get Directions <ArrowRight size={13} />
+                  </a>
+                </div>
               </div>
               <div className="contact-detail">
                 <span><Phone /></span>
@@ -1002,9 +1270,6 @@ function App() {
                 <span><Clock /></span>
                 <div><b>Preschool &amp; Daycare Hours</b><p>Preschool: 9:00 AM – 12:30 PM<br />Daycare: 9:00 AM – 8:00 PM</p></div>
               </div>
-              <a className="map-link" href="https://www.google.com/maps/search/?api=1&query=Great+Banyan+Preschool+Adambakkam+Chennai" target="_blank" rel="noreferrer">
-                Open in Google Maps <ArrowRight size={16} />
-              </a>
             </div>
             <form className="enquiry-card" onSubmit={sendEnquiry}>
               <div className="form-heading">
@@ -1021,6 +1286,13 @@ function App() {
                 <label>Child's Name<input name="child" value={form.child} onChange={update} placeholder="e.g. Aarav" /></label>
                 <label>Phone Number<input required name="phone" type="tel" value={form.phone} onChange={update} placeholder="e.g. 9876543210" /></label>
               </div>
+              <label>Preferred Campus
+                <select name="campus" value={form.campus} onChange={update}>
+                  <option value="Campus 1 (11, 4th St, V V Colony)">Campus 1 — 11, 4th St, V V Colony</option>
+                  <option value="Campus 2 (Saraswathi St, Big St)">Campus 2 — Saraswathi St, Big St</option>
+                  <option value="Either Campus / Need Recommendation">Either / Need recommendation</option>
+                </select>
+              </label>
               <label>Interested In
                 <select name="programme" value={form.programme} onChange={update}>
                   <option>Play Group (1.5 - 2.5 yrs)</option>
@@ -1075,13 +1347,19 @@ function App() {
             <a href="#gallery">Moments Gallery</a>
             <a href="#routine">Daily Rhythm</a>
             <a href="#daycare">Daycare</a>
-            <a href="#celebrations">Celebrations</a>
+            <a href="#campuses">Campuses &amp; Maps</a>
+            <a href="#faq">FAQ</a>
           </div>
           <div className="footer-links">
-            <b>Say Hello</b>
-            <a href="tel:+919962456830">099624 56830</a>
-            <a href="#contact">Adambakkam, Chennai 600088</a>
-            <a href="https://www.google.com/maps/search/?api=1&query=Great+Banyan+Preschool+Adambakkam+Chennai" target="_blank" rel="noreferrer">Find us on Google Maps ↗</a>
+            <b>Our Campuses</b>
+            <a href="tel:+919962456830">099624 56830 (Open till 8 PM)</a>
+            <a href="https://maps.app.goo.gl/QZZfJmCJb4fdEhsW8" target="_blank" rel="noreferrer">
+              Campus 1: 11, 4th St, V V Colony ↗
+            </a>
+            <a href="https://maps.app.goo.gl/TXAaP2PYPCMK2zJm6" target="_blank" rel="noreferrer">
+              Campus 2: Saraswathi St, Big St ↗
+            </a>
+            <a href="#campuses">View Interactive Google Maps ↓</a>
           </div>
           <div className="footer-sun">
             <Sun size={42} strokeWidth={1.3} />
