@@ -258,9 +258,9 @@ const celebrationHighlights = [
 
 const funPillars = [
   { icon: ShieldCheck, title: 'Safe & Hygienic Haven', desc: 'Rounded edge furniture, non-toxic organic materials, CCTV monitored spaces, and hospital-grade sanitization daily.', sticker: '100% Safe' },
-  { icon: Users,       title: '1:8 Loving Teacher Ratio', desc: 'No child left unheard. Every tiny emotion, milestone, and sweet question receives immediate warm attention.', sticker: 'Tender Care' },
-  { icon: Compass,     title: 'Activity-Led Learning', desc: 'No rote memorization. We inspire deep curiosity through touch, feel, listen, build, and joyful wonder.', sticker: 'Hands-on' },
-  { icon: Camera,      title: 'Daily WhatsApp Milestones', desc: 'Parents receive heartwarming photo glimpses and daily routine updates so you never miss a milestone.', sticker: 'Live Updates' },
+  { icon: Users, title: '1:8 Loving Teacher Ratio', desc: 'No child left unheard. Every tiny emotion, milestone, and sweet question receives immediate warm attention.', sticker: 'Tender Care' },
+  { icon: Compass, title: 'Activity-Led Learning', desc: 'No rote memorization. We inspire deep curiosity through touch, feel, listen, build, and joyful wonder.', sticker: 'Hands-on' },
+  { icon: Camera, title: 'Daily WhatsApp Milestones', desc: 'Parents receive heartwarming photo glimpses and daily routine updates so you never miss a milestone.', sticker: 'Live Updates' },
 ]
 
 const faqs = [
@@ -821,7 +821,7 @@ function App() {
                     justifyContent: 'space-between',
                     flexWrap: 'wrap',
                     gap: '10px',
-                    marginBottom: '16px'
+                    marginBottom: '20px'
                   }}
                 >
                   <span
